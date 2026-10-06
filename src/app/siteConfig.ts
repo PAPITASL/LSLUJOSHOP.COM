@@ -18,7 +18,7 @@ export function getAbsoluteSiteUrl(path: string): string | undefined {
   if (!siteUrl) return undefined;
 
   try {
-    return new URL(path, siteUrl).toString();
+    return new URL(path.replace(/^\//, ""), siteUrl).toString();
   } catch {
     return undefined;
   }

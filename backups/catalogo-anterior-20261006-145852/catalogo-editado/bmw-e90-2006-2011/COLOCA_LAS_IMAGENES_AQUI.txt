@@ -1,1 +1,0 @@
-Coloca aquí las imágenes del BMW E90 2006-2011. Después se verificarán sus extensiones y nombres reales contra el JSON.

@@ -1,3 +1,4 @@
+import { withBasePath } from "./basePath";
 import type { SyntheticEvent } from "react";
 
 const IMAGE_FOLDERS: Array<[prefix: string, folder: string]> = [
@@ -97,12 +98,12 @@ export const resolveProductImage = (img?: string) => {
 
 export const getProductImageVariantUrl = (source: string, variant: "card" | "large") => {
   if (!source || source.startsWith("http") || !decodeURI(source).startsWith("/catalogo-editado/")) {
-    return source || "/log.png";
+    return withBasePath(source || "/log.png");
   }
   const stem = source
     .replace(/\.(?:jpe?g)\.png$/i, "")
     .replace(/\.(?:png|jpe?g|webp)$/i, "");
-  return `${stem}.${variant}.webp`;
+  return withBasePath(`${stem}.${variant}.webp`);
 };
 
 export const useProductImageFallback = (event: SyntheticEvent<HTMLImageElement>) => {
@@ -111,7 +112,7 @@ export const useProductImageFallback = (event: SyntheticEvent<HTMLImageElement>)
 
   if (/\.(?:card|large)\.webp$/i.test(source)) {
     image.onerror = null;
-    image.src = "/log.png";
+    image.src = withBasePath("/log.png");
     return;
   }
 
@@ -121,5 +122,5 @@ export const useProductImageFallback = (event: SyntheticEvent<HTMLImageElement>)
   }
 
   image.onerror = null;
-  image.src = "/log.png";
+  image.src = withBasePath("/log.png");
 };

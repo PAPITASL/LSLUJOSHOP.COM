@@ -1,3 +1,4 @@
+import { withBasePath } from "../basePath";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
@@ -32,7 +33,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative flex flex-col items-center justify-center py-1">
           <Link to="/" className="flex h-52 items-center justify-center overflow-hidden pt-3 sm:h-32" aria-label="Ir al inicio">
-            <img src="/animations/lujoshop-llantas.gif" alt="LujoShop" width="900" height="257" loading="eager" decoding="async" className="h-auto w-72 max-w-none object-contain drop-shadow-[0_5px_10px_rgba(0,0,0,0.45)] sm:w-80 lg:w-126" />
+            <img src={withBasePath("/animations/lujoshop-llantas.gif")} alt="LujoShop" width="900" height="257" loading="eager" decoding="async" className="h-auto w-72 max-w-none object-contain drop-shadow-[0_5px_10px_rgba(0,0,0,0.45)] sm:w-80 lg:w-126" />
           </Link>
 
           <nav className="-mt-2 hidden w-full max-w-3xl items-center justify-center gap-6 rounded-full bg-gradient-to-r from-transparent via-black/35 to-transparent px-8 pb-2 backdrop-blur-lg md:flex lg:gap-10" aria-label="Navegación principal">

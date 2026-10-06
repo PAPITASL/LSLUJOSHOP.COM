@@ -16,7 +16,8 @@ function figmaAssetResolver() {
   }
 }
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  base: process.env.VITE_BASE_PATH ?? (command === 'serve' ? '/' : '/LSLUJOSHOP.COM/'),
   publicDir: '.image-cache/public',
   plugins: [
     figmaAssetResolver(),
@@ -34,4 +35,4 @@ export default defineConfig({
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
-})
+}))

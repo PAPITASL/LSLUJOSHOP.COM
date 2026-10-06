@@ -1,3 +1,4 @@
+import { BASE_PATH, withBasePath } from "./app/basePath";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
 import { AppRoutes } from "./app/App";
@@ -12,7 +13,7 @@ export function renderSeoRoute(path: string) {
 
   return {
     html: renderToString(
-      <StaticRouter location={path}>
+      <StaticRouter basename={BASE_PATH} location={withBasePath(path)}>
         <AppRoutes />
       </StaticRouter>,
     ),

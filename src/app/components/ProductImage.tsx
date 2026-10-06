@@ -1,3 +1,4 @@
+import { withBasePath } from "../basePath";
 import type { ImgHTMLAttributes } from "react";
 import { getProductImageVariantUrl, useProductImageFallback } from "../productImage";
 
@@ -19,7 +20,7 @@ export function ProductImage({ src, variant, critical = false, ...props }: Produ
       {...(critical ? { fetchpriority: "high" } : {})}
       onError={(event) => {
         if (event.currentTarget.getAttribute("src") === optimizedSrc && optimizedSrc !== src) {
-          event.currentTarget.src = src || "/log.png";
+          event.currentTarget.src = withBasePath(src || "/log.png");
           return;
         }
         useProductImageFallback(event);

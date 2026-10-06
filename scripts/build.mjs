@@ -130,6 +130,10 @@ try {
     stats.bytes += statSync(filePath).size;
   }
 
+  // Unknown and legacy URLs can still load the router on GitHub Pages.
+  writeFileSync(join(distDir, "404.html"), template, "utf8");
+  writeFileSync(join(distDir, ".nojekyll"), "", "utf8");
+
   const renderMs = performance.now() - renderStartedAt;
   const structuredDataStats = validateStructuredData(distDir, routes);
   const totalMs = performance.now() - totalStartedAt;

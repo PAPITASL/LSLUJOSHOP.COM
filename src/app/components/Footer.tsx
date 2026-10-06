@@ -1,3 +1,4 @@
+import { withBasePath } from "../basePath";
 import { Link } from "react-router";
 import { Instagram, Facebook, MessageCircle, MapPin, Clock, Mail } from "lucide-react";
 
@@ -11,7 +12,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 group">
-              <img src="/lg.png" alt="LujoShop" width="900" height="257" loading="lazy" decoding="async" className="h-50 w-auto" />
+              <img src={withBasePath("/lg.png")} alt="LujoShop" width="900" height="257" loading="lazy" decoding="async" className="h-50 w-auto" />
             </Link>
             <p className="text-[#888] text-sm leading-relaxed mb-5">
               Repuestos, piezas y accesorios para diferentes marcas y modelos. Atención personalizada y envíos a toda Colombia.

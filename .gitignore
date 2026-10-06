@@ -1,1 +1,11 @@
-node_modules
+﻿node_modules/
+dist/
+.image-cache/
+.prerender/
+backups/
+public copy/
+.codex_filemap.txt
+.codex_files_short.txt
+.env
+.env.*
+!.env.example

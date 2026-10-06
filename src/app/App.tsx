@@ -1,3 +1,4 @@
+import { BASE_PATH } from "./basePath";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router";
 import { useEffect } from "react";
 import { Navbar } from "./components/Navbar";
@@ -51,7 +52,7 @@ export function AppRoutes() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={BASE_PATH}>
       <AppRoutes />
     </BrowserRouter>
   );

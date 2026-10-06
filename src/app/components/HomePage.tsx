@@ -1,3 +1,4 @@
+import { withBasePath } from "../basePath";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { ChevronRight, Star, Package, Truck, Settings, CheckCircle, Search, Phone, ArrowRight } from "lucide-react";
@@ -311,7 +312,7 @@ export function HomePage() {
                 style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: "16px" }}>
                 {marca.img ? (
                   <img
-                    src={marca.img}
+                    src={withBasePath(marca.img)}
                     alt={marca.name}
                     width="900"
                     height="900"
@@ -361,7 +362,7 @@ export function HomePage() {
                 to={`/catalogo?tipo=${encodeURIComponent(cat.name)}`}
                 className="relative h-44 rounded-lg overflow-hidden group cursor-pointer border border-white/8 hover:border-[#c0392b]/50 transition-all duration-300"
               >
-                <img src={cat.img} alt={cat.name} width="1254" height="1254" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                <img src={withBasePath(cat.img)} alt={cat.name} width="1254" height="1254" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-4">
                   <p className="text-white" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: "16px", letterSpacing: "0.03em", textTransform: "uppercase" }}>
