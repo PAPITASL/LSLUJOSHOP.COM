@@ -1,3 +1,4 @@
+import { getCatalogYears, matchesProductYear } from "../../data/catalogYears";
 import { useState } from "react";
 import { useSearchParams } from "react-router";
 import { Search, SlidersHorizontal, X, ChevronDown, ArrowRight } from "lucide-react";
@@ -16,6 +17,7 @@ const MODELOS_BY_BRAND: Record<string, string[]> = MARCAS.reduce((acc, marca) =>
   return acc;
 }, {} as Record<string, string[]>);
 const CATEGORIAS = Array.from(new Set(ALL_PRODUCTS.map((p) => p.categoria))).sort();
+const ANIOS = getCatalogYears(ALL_PRODUCTS);
 const ESTADOS: ProductStatus[] = ["Disponible", "Por pedido", "Reservado"];
 
 function matchOption(value: string | null, options: string[]) {
@@ -30,10 +32,16 @@ export function CatalogoPage() {
   const [filterModelo, setFilterModelo] = useState(searchParams.get("modelo") || "");
   const [filterCategoria, setFilterCategoria] = useState(searchParams.get("tipo") || "");
   const [filterEstado, setFilterEstado] = useState<ProductStatus | "">("");
-  const [filterAnio, setFilterAnio] = useState(searchParams.get("anio") || "");
+  const [filterAnio, setFilterAnio] = useState(() => matchOption(searchParams.get("anio"), ANIOS));
   const [sortBy, setSortBy] = useState("default");
   const [showCount, setShowCount] = useState(9);
   const [showMoreFilters, setShowMoreFilters] = useState(false);
+
+  const availableYears = getCatalogYears(ALL_PRODUCTS.filter((product) =>
+    (!filterMarca || product.marca === filterMarca) &&
+    (!filterModelo || product.modelo === filterModelo),
+  ));
+  const selectedYear = availableYears.includes(filterAnio) ? filterAnio : "";
 
   const matchesFilters = (p: Product) => {
     const q = query.toLowerCase();
@@ -42,7 +50,7 @@ export function CatalogoPage() {
     if (filterModelo && p.modelo !== filterModelo) return false;
     if (filterCategoria && p.categoria !== filterCategoria) return false;
     if (filterEstado && p.estado !== filterEstado) return false;
-    if (filterAnio && !p.anio.includes(filterAnio)) return false;
+    if (!matchesProductYear(p.anio, selectedYear)) return false;
     return true;
   };
 
@@ -108,6 +116,8 @@ export function CatalogoPage() {
               const value = e.target.value;
               setFilterMarca(value);
               setFilterModelo("");
+              setFilterAnio("");
+              setShowCount(9);
             }}
             className="w-full bg-[#1e1e1e] border border-white/10 text-[#d0d0d0] rounded px-3 py-2.5 text-sm focus:outline-none focus:border-[#c0392b]/50"
           >
@@ -123,7 +133,7 @@ export function CatalogoPage() {
             style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 600, letterSpacing: "0.1em" }}>Modelo</p>
           <select
             value={filterModelo}
-            onChange={(e) => setFilterModelo(e.target.value)}
+            onChange={(e) => { setFilterModelo(e.target.value); setFilterAnio(""); setShowCount(9); }}
             className="w-full bg-[#1e1e1e] border border-white/10 text-[#d0d0d0] rounded px-3 py-2.5 text-sm focus:outline-none focus:border-[#c0392b]/50"
           >
             <option value="">Todos los modelos</option>
@@ -151,13 +161,17 @@ export function CatalogoPage() {
         <div>
           <p className="text-[#888] text-xs uppercase tracking-widest mb-3"
             style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 600, letterSpacing: "0.1em" }}>Año</p>
-          <input
-            type="text"
-            placeholder="Ej: 2020"
-            value={filterAnio}
-            onChange={(e) => setFilterAnio(e.target.value)}
-            className="w-full bg-[#1e1e1e] border border-white/10 text-[#d0d0d0] placeholder-[#555] rounded px-3 py-2.5 text-sm focus:outline-none focus:border-[#c0392b]/50"
-          />
+          <select
+            aria-label="Año"
+            value={selectedYear}
+            onChange={(e) => { setFilterAnio(e.target.value); setShowCount(9); }}
+            className="w-full bg-[#1e1e1e] border border-white/10 text-[#d0d0d0] rounded px-3 py-2.5 text-sm focus:outline-none focus:border-[#c0392b]/50"
+          >
+            <option value="">Todos los años</option>
+            {availableYears.map((year) => (
+              <option key={year} value={year}>{year}</option>
+            ))}
+          </select>
         </div>
       </div>
 
