@@ -1,3 +1,4 @@
+import CATEGORIES from "../../data/categories.json";
 import { getCatalogYearRanges, formatYearRange, matchesProductYear } from "../../data/catalogYears";
 import { useState } from "react";
 import { useSearchParams } from "react-router";
@@ -16,7 +17,7 @@ const MODELOS_BY_BRAND: Record<string, string[]> = MARCAS.reduce((acc, marca) =>
   acc[marca] = Array.from(new Set(ALL_PRODUCTS.filter((p) => p.marca === marca).map((p) => p.modelo))).sort();
   return acc;
 }, {} as Record<string, string[]>);
-const CATEGORIAS = Array.from(new Set(ALL_PRODUCTS.map((p) => p.categoria))).sort();
+const CATEGORIAS: string[] = CATEGORIES;
 const ANIOS = getCatalogYearRanges(ALL_PRODUCTS);
 const ESTADOS: ProductStatus[] = ["Disponible", "Por pedido", "Reservado"];
 
@@ -30,7 +31,7 @@ export function CatalogoPage() {
   const [query, setQuery] = useState(searchParams.get("q") || "");
   const [filterMarca, setFilterMarca] = useState(() => matchOption(searchParams.get("marca"), MARCAS));
   const [filterModelo, setFilterModelo] = useState(searchParams.get("modelo") || "");
-  const [filterCategoria, setFilterCategoria] = useState(searchParams.get("tipo") || "");
+  const [filterCategoria, setFilterCategoria] = useState(() => matchOption(searchParams.get("tipo"), CATEGORIAS));
   const [filterEstado, setFilterEstado] = useState<ProductStatus | "">("");
   const [filterAnio, setFilterAnio] = useState(() => matchOption(searchParams.get("anio"), ANIOS));
   const [sortBy, setSortBy] = useState("default");

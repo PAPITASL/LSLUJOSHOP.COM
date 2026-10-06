@@ -1,3 +1,4 @@
+import { classifyProductCategory } from "./product-categories.mjs";
 import { existsSync, readdirSync, readFileSync, writeFileSync, mkdirSync, copyFileSync, renameSync } from 'node:fs';
 import { join, parse } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -6,17 +7,7 @@ const imagesDir = join(root, 'public/catalogo-editado');
 const dataDir = join(root, 'src/data');
 const staged = [];
 const sourceNames = JSON.parse(readFileSync(join(root, 'scripts/catalog-image-names.json'), 'utf8'));
-const categories = [
-  [/TERCER STOP|STOPS?|LUCES TRASERAS/, 'ILUMINACIÓN TRASERA', 'STOPS Y TERCER STOP'],
-  [/FAROLAS?|FAROS?|EXPLORADORAS?|DIRECCIONALES?|LUZ|LUCES/, 'ILUMINACIÓN DELANTERA', 'FAROLAS Y LUCES'],
-  [/PERSIANA|PARRILLA|REJILLA/, 'CARROCERÍA Y EXTERIOR', 'PARRILLAS'],
-  [/BOMPER|BUMPER|DEFENSA/, 'CARROCERÍA Y EXTERIOR', 'BUMPERS'],
-  [/ESTRIBO/, 'CARROCERÍA Y EXTERIOR', 'ESTRIBOS'],
-  [/ESPEJO/, 'CARROCERÍA Y EXTERIOR', 'ESPEJOS LATERALES'],
-  [/TABLERO|MILLARE|CONSOLA|APOYABRAZOS|RADIO|VOLANTE|TAPETE|ELEVAVIDRIO|MANIJA INTERIOR|TAPA CONSOLA|PORTAVASO/, 'INTERIOR Y CONFORT', 'ACCESORIOS INTERIORES'],
-  [/FRENO|ALTERNADOR|RADIADOR|MOTOR|BATERIA|ADMISION|FILTRO|SUSPENSION|AMORTIGUADOR|BOMBA|DEPOSITO/, 'MECÁNICA Y MOTOR', 'REPUESTOS MECÁNICOS'],
-  [/.*/, 'CARROCERÍA Y EXTERIOR', 'ACCESORIOS EXTERIORES'],
-];
+
 const ids = new Set();
 let total = 0;
 for (const folder of readdirSync(imagesDir, { withFileTypes: true }).filter(e => e.isDirectory()).sort((a,b) => a.name.localeCompare(b.name))) {
@@ -31,13 +22,12 @@ for (const folder of readdirSync(imagesDir, { withFileTypes: true }).filter(e =>
     const marca = vehicle.startsWith('CHEVROLET') ? 'CHEVROLET' : 'FORD';
     const modelo = marca === 'CHEVROLET' ? 'C/K Silverado / Cheyenne' : vehicle === 'FORD_150_BRONCO' ? 'F-150 / Bronco' : 'F-150 / Lobo';
     const anio = `${start}-${end}`;
-    const normalized = nombre.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    const [, categoria, subcategoria] = categories.find(([pattern]) => pattern.test(normalized));
+    const categoria = classifyProductCategory(nombre);
     const key = `${folder.name}/${filename}`;
     const id = 100000 + (parseInt(createHash('sha256').update(`IMAGENES_CATALOGO_${folder.name.replace(/^IMAGENES_CATALOGO_/, '').replaceAll('-', '_').toUpperCase()}/${originalName}`).digest('hex').slice(0, 8),16) % 2000000000);
     if (ids.has(id)) throw new Error(`ID duplicado: ${key}`);
     ids.add(id);
-    products.push({ id, marca, modelo, anio, referencia: sourceId ? `${vehicle}-${anio}-ID-${sourceId}` : `${vehicle}-${anio}-${id}`, categoria, subcategoria, nombre, img: `/catalogo-editado/${key}`, desc: `${nombre} para ${marca} ${modelo}, años ${anio}. Consulta precio y compatibilidad.`, estado: 'Por pedido' });
+    products.push({ id, marca, modelo, anio, referencia: sourceId ? `${vehicle}-${anio}-ID-${sourceId}` : `${vehicle}-${anio}-${id}`, categoria, nombre, img: `/catalogo-editado/${key}`, desc: `${nombre} para ${marca} ${modelo}, años ${anio}. Consulta precio y compatibilidad.`, estado: 'Por pedido' });
     total++;
   }
   const filename = `catalogo_${folder.name.replace(/^IMAGENES_CATALOGO_/, '').replaceAll('-', '_').toLowerCase()}.json`;

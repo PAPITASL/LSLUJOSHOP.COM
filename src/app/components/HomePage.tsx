@@ -1,3 +1,4 @@
+import CATEGORY_NAMES from "../../data/categories.json";
 import { withBasePath } from "../basePath";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
@@ -39,16 +40,23 @@ const MARCAS = [
 
 const SEO_BRANDS_BY_NAME = new Map(BRANDS.map((brand) => [brand.name.toLocaleLowerCase("es"), brand]));
 
-const CATEGORIAS = [
-  { name: "Repuestos", img: "/Categorias/01_REPUESTOS.png", icon: "⚙️" },
-  { name: "Farolas y luces", img: "/Categorias/02_FAROLAS_Y_LUCES.png", icon: "💡" },
-  { name: "Pesianas", img: "/Categorias/03_PARRILLAS.png", icon: "🔲" },
-  { name: "Bumpers y defensas", img: "/Categorias/04_BUMPERS_Y_DEFENSAS.png", icon: "🛡️" },
-  { name: "Estribos", img: "/Categorias/05_ESTRIBOS.png", icon: "➕" },
-  { name: "Accesorios interiores", img: "/Categorias/06_ACCESORIOS_INTERIORES.png", icon: "🪑" },
-  { name: "Accesorios exteriores", img: "/Categorias/07_ACCESORIOS_EXTERIORES.png", icon: "🚗" },
-  { name: "Partes difíciles", img: "/Categorias/08_PIEZAS_DIFICILES.png", icon: "🔍" },
-];
+const CATEGORY_IMAGES: Record<string, string> = {
+  "FAROLAS": "02_FAROLAS_Y_LUCES.png",
+  "STOPS": "02_FAROLAS_Y_LUCES.png",
+  "PERSIANAS / PARRILLAS": "03_PARRILLAS.png",
+  "EXPLORADORAS": "02_FAROLAS_Y_LUCES.png",
+  "LUCES Y DIRECCIONALES": "02_FAROLAS_Y_LUCES.png",
+  "CARROCERÍA": "04_BUMPERS_Y_DEFENSAS.png",
+  "INTERIOR": "06_ACCESORIOS_INTERIORES.png",
+  "ELÉCTRICO": "01_REPUESTOS.png",
+  "SUSPENSIÓN": "01_REPUESTOS.png",
+  "ESCAPE": "01_REPUESTOS.png",
+  "EMBLEMAS Y ACCESORIOS": "07_ACCESORIOS_EXTERIORES.png",
+  "OTROS": "08_PIEZAS_DIFICILES.png",
+};
+const CATEGORIAS = CATEGORY_NAMES.map((name: string) => ({
+  name, img: "/Categorias/" + CATEGORY_IMAGES[name],
+}));
 
 const PRODUCTOS = BRANDS.flatMap((brand) => brand.models).slice(0, 6).map((model) => {
   const product = model.products.find((product) => /FAROLAS|PERSIANA|STOPS/.test(product.nombre)) ?? model.products[0];
