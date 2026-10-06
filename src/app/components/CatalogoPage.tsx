@@ -1,4 +1,4 @@
-import { getCatalogYears, matchesProductYear } from "../../data/catalogYears";
+import { getCatalogYearRanges, formatYearRange, matchesProductYear } from "../../data/catalogYears";
 import { useState } from "react";
 import { useSearchParams } from "react-router";
 import { Search, SlidersHorizontal, X, ChevronDown, ArrowRight } from "lucide-react";
@@ -17,7 +17,7 @@ const MODELOS_BY_BRAND: Record<string, string[]> = MARCAS.reduce((acc, marca) =>
   return acc;
 }, {} as Record<string, string[]>);
 const CATEGORIAS = Array.from(new Set(ALL_PRODUCTS.map((p) => p.categoria))).sort();
-const ANIOS = getCatalogYears(ALL_PRODUCTS);
+const ANIOS = getCatalogYearRanges(ALL_PRODUCTS);
 const ESTADOS: ProductStatus[] = ["Disponible", "Por pedido", "Reservado"];
 
 function matchOption(value: string | null, options: string[]) {
@@ -37,7 +37,7 @@ export function CatalogoPage() {
   const [showCount, setShowCount] = useState(9);
   const [showMoreFilters, setShowMoreFilters] = useState(false);
 
-  const availableYears = getCatalogYears(ALL_PRODUCTS.filter((product) =>
+  const availableYears = getCatalogYearRanges(ALL_PRODUCTS.filter((product) =>
     (!filterMarca || product.marca === filterMarca) &&
     (!filterModelo || product.modelo === filterModelo),
   ));
@@ -169,7 +169,7 @@ export function CatalogoPage() {
           >
             <option value="">Todos los años</option>
             {availableYears.map((year) => (
-              <option key={year} value={year}>{year}</option>
+              <option key={year} value={year}>{formatYearRange(year)}</option>
             ))}
           </select>
         </div>

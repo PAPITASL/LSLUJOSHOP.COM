@@ -1,6 +1,6 @@
 ﻿import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { getProductYears, getCatalogYears, matchesProductYear } from '../src/data/catalogYears.ts';
+import { getProductYears, getCatalogYears, getCatalogYearRanges, formatYearRange, matchesProductYear } from '../src/data/catalogYears.ts';
 assert.deepEqual(getProductYears('2015-2017'), ['2017','2016','2015']);
 assert.deepEqual(getProductYears('2000, 2005–2007'), ['2007','2006','2005','2000']);
 assert.equal(matchesProductYear('2015-2017','2016'), true);
@@ -18,3 +18,11 @@ const ford2016=products.filter(p=>p.marca==='FORD' && matchesProductYear(p.anio,
 assert(ford2016.length>0);
 assert(ford2016.every(p=>p.anio==='2015-2017'));
 console.log(`Filtro validado: ${years.length} años, rangos intermedios y opciones por marca.`);
+
+assert.equal(formatYearRange('2000-2004'), 'Del 2000 al 2004');
+assert.deepEqual(getCatalogYearRanges([{anio:'2000-2004'},{anio:'2000-2004'},{anio:'2005-2008'}]), ['2005-2008','2000-2004']);
+assert.equal(matchesProductYear('2001-2003','2000-2004'), true);
+assert.equal(matchesProductYear('2005-2008','2000-2004'), false);
+assert.equal(matchesProductYear('2015-2017','2015-2017'), true);
+for (const range of getCatalogYearRanges(products)) assert(products.some(p=>p.anio===range));
+console.log('Rangos del desplegable y sus resultados verificados.');

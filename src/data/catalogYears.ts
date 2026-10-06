@@ -18,5 +18,18 @@ export function getCatalogYears(products: readonly { anio: string }[]): string[]
 }
 
 export function matchesProductYear(value: string, year: string): boolean {
-  return !year || getProductYears(value).includes(year);
+  if (!year) return true;
+  const selectedYears = getProductYears(year);
+  return getProductYears(value).some((candidate) => selectedYears.includes(candidate));
+}
+
+export function getCatalogYearRanges(products: readonly { anio: string }[]): string[] {
+  return [...new Set(products.map((product) => product.anio.trim()).filter(Boolean))].sort(
+    (a, b) => Number(b.match(/\d{4}/)?.[0] ?? 0) - Number(a.match(/\d{4}/)?.[0] ?? 0) || b.localeCompare(a),
+  );
+}
+
+export function formatYearRange(value: string): string {
+  const match = value.match(/^(\d{4})\s*[-–—]\s*(\d{4})$/);
+  return match ? `Del ${match[1]} al ${match[2]}` : value;
 }
