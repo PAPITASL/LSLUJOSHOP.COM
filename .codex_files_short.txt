@@ -1,0 +1,80 @@
+package.json
+index.html
+package-lock.json
+postcss.config.mjs
+pnpm-workspace.yaml
+vite.config.ts
+tsconfig.json
+src\vite-env.d.ts
+guidelines\Guidelines.md
+default_shadcn_theme.css
+ATTRIBUTIONS.md
+src\app\whatsapp.ts
+src\styles\theme.css
+src\styles\tailwind.css
+src\styles\index.css
+src\styles\globals.css
+src\styles\fonts.css
+src\main.tsx
+public\VOLKSWAGEN_MK4_GOLF_99_2006 YA\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_MANIJAS_INTERIORES_Y_BISEL_ELEVAVIDRIOS.png
+public\VOLKSWAGEN_MK4_GOLF_99_2006 YA\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_ENCENDIDO_PUSH_START_Y_ACCESO_REMOTO.png
+public\VOLKSWAGEN_MK4_GOLF_99_2006 YA\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_CUBIERTAS_DEPORTIVAS_PARA_PEDALES2.png
+public\VOLKSWAGEN_MK4_GOLF_99_2006 YA\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_CUBIERTAS_DEPORTIVAS_PARA_PEDALES.png
+public\VOLKSWAGEN_MK4_GOLF_99_2006 YA\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_CLUTCH_REFORZADO.png
+public\VOLKSWAGEN_MK4_GOLF_99_2006 YA\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_CLUTCH_CERAMICO_DE_6_PASTILLAS.png
+public\VOLKSWAGEN_MK4_GOLF_99_2006 YA\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_ADMISION_DE_AIRE.png
+public\VOLKSWAGEN_MK4_GOLF_99_2006 YA\VOLKSWAGEN_GOLF_MK4_1999_2006_INTERRUPTOR_ELEVAVIDRIOS.png
+public\VOLKSWAGEN_MK4_GOLF_99_2006 YA\VOLKSWAGEN_GOLF_MK4_1999_2006_DIFUSOR_TRASERO_VALANCE_TRASERO.png
+public\VOLKSWAGEN_MK4_GOLF_99_2006 YA\VOLKSWAGEN_GOLF_MK4_1999_2006_ARNES_DE_INYECTORES.png
+src\app\components\WhatsAppButton.tsx
+public\Categorias\08_PIEZAS_DIFICILES.png
+public\Categorias\07_ACCESORIOS_EXTERIORES.png
+public\Categorias\06_ACCESORIOS_INTERIORES.png
+public\Categorias\05_ESTRIBOS.png
+public\Categorias\04_BUMPERS_Y_DEFENSAS.png
+public\Categorias\03_PARRILLAS.png
+public\Categorias\02_FAROLAS_Y_LUCES.png
+public\Categorias\01_REPUESTOS.png
+src\data\catalogo_VW_golfmk4_19_06.json
+src\data\catalogo_silverado_silverado_04.json
+src\data\catalogo_ford_lobo_2008.json
+src\data\catalogo_ford_lobo_1999.json
+src\data\catalogo_ford_f150_20.json
+src\data\catalogo_ford_f150_17.json
+src\data\catalogo_ford_f150_12.json
+src\data\catalogo_ford_bronco_90.json
+src\data\catalogo_chevrolet_silverado_90-99.json
+src\data\catalogo_chevrolet_silverado_2000.json
+src\data\catalogo_chevrolet_silverado_03.json
+src\data\catalogo_bronco_fullsize_80-96.json
+src\assets\log.png
+public\Logos\Logo_VW.jpeg
+public\Logos\Logo_uni.jpeg
+public\Logos\Logo_toyota.jpeg
+public\Logos\Logo_tesla.jpeg
+public\Logos\Logo_renault.jpeg
+public\Logos\Logo_nissan.jpeg
+public\Logos\Logo_mazda.jpeg
+public\Logos\Logo_kia.jpeg
+public\Logos\Logo_honda.jpeg
+public\Logos\Logo_ford.jpeg
+public\Logos\Logo_chevrolet.jpeg
+public\Logos\Logo_BYD.jpeg
+public\log.png
+public\lg.png
+src\app\components\ConocenosPage.tsx
+src\app\components\CatalogoPage.tsx
+src\app\App.tsx
+public\animations\lujoshop-llantas.gif
+public\animations\lujoshop-ensamble.gif
+public\animations\lujoshop-clean.png
+public\animations\lujoshop-chroma.png
+public\catalogo-editado\volkswagen-golf-mk4\VOLKSWAGEN_GOLF_MK4_1999_2006_PAR_DE_LUCES_LED_DE_CORTESIA_PARA_PUERTA.png
+public\catalogo-editado\volkswagen-golf-mk4\VOLKSWAGEN_GOLF_MK4_1999_2006_PAR_DE_EXPLORADORAS_CON_REJILLA.png
+public\catalogo-editado\volkswagen-golf-mk4\VOLKSWAGEN_GOLF_MK4_1999_2006_PAR_DE_DISCOS_DE_FRENO_PERFORADOS_Y_RANURADOS.png
+public\catalogo-editado\volkswagen-golf-mk4\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_ENCENDIDO_PUSH_START_Y_ACCESO_REMOTO.png
+public\catalogo-editado\volkswagen-golf-mk4\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_CUBIERTAS_DEPORTIVAS_PARA_PEDALES2.png
+public\catalogo-editado\volkswagen-golf-mk4\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_CUBIERTAS_DEPORTIVAS_PARA_PEDALES.png
+public\catalogo-editado\volkswagen-golf-mk4\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_CLUTCH_REFORZADO.png
+public\catalogo-editado\volkswagen-golf-mk4\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_CLUTCH_CERAMICO_DE_6_PASTILLAS.png
+public\catalogo-editado\volkswagen-golf-mk4\VOLKSWAGEN_GOLF_MK4_1999_2006_KIT_DE_ADMISION_DE_AIRE.png

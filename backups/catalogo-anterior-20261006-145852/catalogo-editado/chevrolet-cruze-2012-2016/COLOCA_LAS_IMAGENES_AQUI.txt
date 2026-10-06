@@ -1,0 +1,4 @@
+Coloca en esta carpeta las imágenes del Chevrolet Cruze 2012-2016 conservando exactamente sus nombres de archivo.
+
+Las nueve imágenes numeradas 01 a 09 aparecen sin extensión en las capturas. Si sus archivos reales tienen extensión (por ejemplo .JPG, .PNG o .webp), añade esa misma extensión a la propiedad "img" correspondiente en:
+src/data/catalogo_chevrolet_cruze_2012_2016.json
